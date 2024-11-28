@@ -1,0 +1,90 @@
+{% comment %} {% if template == 'index' %} <!-- Check if the current page is the homepage --> {% endcomment %}
+<div class="announcement-head collection_{{collection.id}}" id="{{template}}" style="display: none;">{{collection.id}}</div>
+<div class="main announcement-bar{% if block.settings.show_social %} announcement-bar--with-social{% endif %}" role="region" {{ block.shopify_attributes }} style="display: none;">
+  {% if block.settings.announcement_text != blank %}
+    {% if block.settings.announcement_link != blank %}
+      <a href="{{ block.settings.announcement_link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
+    {% endif %}
+    <p class="announcement-bar__message h5">
+      <span>{{ block.settings.announcement_text | escape }}</span>
+      {% if block.settings.announcement_link != blank %}
+        {{ 'icon-arrow.svg' | inline_asset_content }}
+      {% endif %}
+    </p>
+    {% if block.settings.announcement_link != blank %}
+      </a>
+    {% endif %}
+  {% endif %}
+</div>
+{% comment %} {% endif %} {% endcomment %}
+
+{% comment %} <script>
+  // Get the shop's domain
+  const shopUrl = '{{ shop.domain }}';
+  
+  // You can now use the shopUrl to conditionally load announcement text or make requests to your backend
+  // console.log(shopUrl); // For debugging purposes
+  
+  // Example of how you can fetch the announcement text dynamically based on shop URL
+  async function fetchAnnouncementText() {
+    // const response = await fetch(`http://localhost:3000/api/get-announcement-text?shopUrl=${shopUrl}`);
+    const response = await fetch(`http://localhost:8002/api/announcement?shopUrl=${shopUrl}`);
+    const data = await response.json();
+    console.log(data.announcementData);
+    
+    
+    if (data?.announcementData?.data) {
+      // Update the announcement text dynamically (in case you want to fetch it from a backend)
+      const announcementText = data?.announcementData?.data?.announcementText;
+      const backgroundColor = data?.announcementData?.data?.backgroundColor;
+      const textColor = data?.announcementData?.data?.textColor;
+      
+      // Check if the response contains a new announcement text and apply it
+      if (announcementText) {
+        document.querySelector('.announcement-bar__message span').textContent = announcementText;
+      }
+      
+      // Check if a background color is provided, and apply it to the announcement bar
+      if (backgroundColor) {
+        document.querySelector('.announcement-bar').style.backgroundColor = backgroundColor;
+      }
+      
+      // Check if a text color is provided, and apply it to the announcement text
+      if (textColor) {
+        document.querySelector('.announcement-bar__message span').style.color = textColor;
+      }
+    }
+  }
+  
+  // Call the fetch function if needed
+  fetchAnnouncementText();
+</script> {% endcomment %}
+
+
+
+{% comment %} <script src={{announcement.js | asset_url}} defer></script> {% endcomment %}
+
+<script defer type="module" src="{{ "announcement.js" | asset_url }}"></script>
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement Text",
+        "default": "Welcome to our store! Enjoy free shipping on all orders."
+      }, {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Announcement Link"
+      }, {
+        "type": "checkbox",
+        "id": "show_social",
+        "label": "Show social icons",
+        "default": false
+      }
+    ],
+    "target": "section"
+  }
+{% endschema %}

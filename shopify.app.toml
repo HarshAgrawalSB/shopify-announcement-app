@@ -1,0 +1,33 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "e42db0e7025896f44724cf0821833904"
+name = "announcement-bar"
+handle = "announcement-bar-26"
+application_url = "https://flesh-stamps-interview-tim.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products read_themes write_themes"
+
+[auth]
+redirect_urls = [
+  "https://flesh-stamps-interview-tim.trycloudflare.com/auth/callback",
+  "https://flesh-stamps-interview-tim.trycloudflare.com/auth/shopify/callback",
+  "https://flesh-stamps-interview-tim.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-10"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+[pos]
+embedded = false
+
+[build]
+dev_store_url = "harsh-agrawal-store.myshopify.com"
+automatically_update_urls_on_dev = true
+include_config_on_deploy = true
