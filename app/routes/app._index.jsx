@@ -25,6 +25,7 @@ import { SearchIcon } from '@shopify/polaris-icons';
 import { TitleBar, useAppBridge, Modal } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
 import { getAnnouncementDetails } from "../announcement.server";
+import prisma from "../db.server";
 
 
 // Loader function to authenticate the admin
