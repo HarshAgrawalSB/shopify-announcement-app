@@ -1,6 +1,7 @@
 import { json } from "@remix-run/node";
 
 import { getAnnouncementDetails } from "../announcement.server";
+import { cors } from "remix-utils";
 
 export async function loader({ request }) {
     // this now uses the Authorization header to authenticate the user
@@ -8,7 +9,18 @@ export async function loader({ request }) {
     const url = new URL(request.url);
     const shopUrl = url.searchParams.get('shopUrl');
 
+    if (request.method === "OPTIONS") {
+        const response = json({
+            status: 200,
+        });
+        return await cors(request, response);
+    }
+
     let announcementData = await getAnnouncementDetails(shopUrl);
 
-    return json({ announcementData });
+    const response = json({ announcementData })
+
+    // return json({ announcementData });
+
+    return cors(request, response)
 }
