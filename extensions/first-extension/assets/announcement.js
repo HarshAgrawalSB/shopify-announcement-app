@@ -10,7 +10,7 @@ const shopUrl = window.shopUrl.split("//")[1]
 // Example of how you can fetch the announcement text dynamically based on shop URL
 async function fetchAnnouncementText() {
     // const response = await fetch(`http://localhost:3000/api/get-announcement-text?shopUrl=${shopUrl}`);
-    const response = await fetch(`http://localhost:8002/api/announcement?shopUrl=${shopUrl}`);
+    const response = await fetch(`https://shopify-announcement-app.onrender.com/api/announcement?shopUrl=${shopUrl}`);
     const data = await response.json();
     console.log(data.announcementData);
 
