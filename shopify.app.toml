@@ -3,7 +3,7 @@
 client_id = "e42db0e7025896f44724cf0821833904"
 name = "announcement-bar"
 handle = "announcement-bar-26"
-application_url = "https://flesh-stamps-interview-tim.trycloudflare.com"
+application_url = "https://hepatitis-burner-se-spas.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -12,9 +12,9 @@ scopes = "write_products read_themes write_themes"
 
 [auth]
 redirect_urls = [
-  "https://flesh-stamps-interview-tim.trycloudflare.com/auth/callback",
-  "https://flesh-stamps-interview-tim.trycloudflare.com/auth/shopify/callback",
-  "https://flesh-stamps-interview-tim.trycloudflare.com/api/auth/callback"
+  "https://hepatitis-burner-se-spas.trycloudflare.com/auth/callback",
+  "https://hepatitis-burner-se-spas.trycloudflare.com/auth/shopify/callback",
+  "https://hepatitis-burner-se-spas.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
