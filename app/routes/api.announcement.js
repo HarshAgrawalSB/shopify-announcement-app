@@ -1,7 +1,7 @@
 import { json } from "@remix-run/node";
 
 import { getAnnouncementDetails } from "../announcement.server";
-import { cors } from "remix-utils";
+import { cors } from "remix-utils/cors";
 
 export async function loader({ request }) {
     // this now uses the Authorization header to authenticate the user
