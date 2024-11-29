@@ -18,9 +18,9 @@ export async function loader({ request }) {
 
     let announcementData = await getAnnouncementDetails(shopUrl);
 
-    await cors(request, announcementData);
-
     const response = json({ announcementData })
+    await cors(request, response);
+
 
     return json({ announcementData });
 
