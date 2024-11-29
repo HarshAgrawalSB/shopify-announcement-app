@@ -3,17 +3,17 @@
   "private": true,
   "scripts": {
     "build": "remix vite:build",
-    "dev": "npx @shopify/shopify-cli app dev",
-    "config:link": "npx @shopify/shopify-cli app config link",
-    "generate": "npx @shopify/shopify-cli app generate",
-    "deploy": "npx @shopify/shopify-cli app deploy",
-    "config:use": "npx @shopify/shopify-cli app config use",
-    "env": "npx @shopify/shopify-cli app env",
+    "dev": "shopify app dev",
+    "config:link": "shopify app config link",
+    "generate": "shopify app generate",
+    "deploy": "shopify app deploy",
+    "config:use": "shopify app config use",
+    "env": "shopify app env",
     "start": "remix-serve ./build/server/index.js",
     "docker-start": "npm run setup && npm run start",
     "setup": "prisma generate && prisma migrate deploy",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
-    "shopify": "npx @shopify/shopify-cli",
+    "shopify": "shopify",
     "prisma": "prisma",
     "graphql-codegen": "graphql-codegen",
     "vite": "vite"
@@ -40,8 +40,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^11.0.3",
-    "vite-tsconfig-paths": "^5.0.1",
-    "@shopify/shopify-cli": "^2.0.0"
+    "vite-tsconfig-paths": "^5.0.1"
   },
   "devDependencies": {
     "@remix-run/eslint-config": "^2.7.1",
