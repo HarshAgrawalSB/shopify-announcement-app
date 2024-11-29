@@ -9,18 +9,20 @@ export async function loader({ request }) {
     const url = new URL(request.url);
     const shopUrl = url.searchParams.get('shopUrl');
 
-    if (request.method === "OPTIONS") {
-        const response = json({
-            status: 200,
-        });
-        return await cors(request, response);
-    }
+    // if (request.method === "OPTIONS") {
+    //     const response = json({
+    //         status: 200,
+    //     });
+    //     return await cors(request, response);
+    // }
 
     let announcementData = await getAnnouncementDetails(shopUrl);
 
+    await cors(request, announcementData);
+
     const response = json({ announcementData })
 
-    // return json({ announcementData });
+    return json({ announcementData });
 
-    return cors(request, response)
+    // return cors(request, response)
 }
