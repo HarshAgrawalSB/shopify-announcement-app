@@ -31,3 +31,7 @@ embedded = false
 dev_store_url = "harsh-agrawal-store.myshopify.com"
 automatically_update_urls_on_dev = true
 include_config_on_deploy = true
+
+[[app.proxy]]
+source = "/apps/announcement-bar/data"
+destination = "https://shopify-announcement-app.onrender.com/api/announcement-bar"

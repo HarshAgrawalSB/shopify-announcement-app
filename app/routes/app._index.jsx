@@ -33,7 +33,6 @@ export const loader = async ({ request }) => {
   const data = await authenticate.admin(request);
   const announcementData = await getAnnouncementDetails(data?.session?.shop);
 
-
   const response = await data?.admin.graphql(
     `#graphql
       query {
@@ -128,7 +127,7 @@ export default function Index() {
   const collections = loaderData?.collectionsData?.data?.collections;
   const [selected, setSelected] = useState("Button");  // Ensure initial state is "Button"
   const [btnText, setBtnText] = useState(announcementDetails?.buttonText ?? "");
-  const [selectedPageForBar, setSelectedPageForBar] = useState('hidden');
+  const [selectedPageForBar, setSelectedPageForBar] = useState(announcementDetails?.selectedPageForBar ?? 'hidden');
   const [selectedCollections, setSelectedCollections] = useState([])
 
   const options = [
