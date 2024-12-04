@@ -33,5 +33,5 @@ automatically_update_urls_on_dev = true
 include_config_on_deploy = true
 
 [[app.proxy]]
-source = "/apps/announcement-bar/data"
+source = "/app/announcement/data"
 destination = "https://shopify-announcement-app.onrender.com/api/announcement-bar"
