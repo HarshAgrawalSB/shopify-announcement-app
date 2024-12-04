@@ -32,6 +32,6 @@ dev_store_url = "harsh-agrawal-store.myshopify.com"
 automatically_update_urls_on_dev = true
 include_config_on_deploy = true
 
-[[app.proxy]]
-source = "/app/announcement/data"
-destination = "https://shopify-announcement-app.onrender.com/api/announcement-bar"
+[app_proxy]
+subpath = "apps/announcement"
+url = "https://shopify-announcement-app.onrender.com/apps/announcement"
