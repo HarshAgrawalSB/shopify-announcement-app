@@ -22,6 +22,7 @@ async function fetchAnnouncementText() {
         const textColor = data?.announcementData?.data?.textColor;
         const action = data?.announcementData?.data?.action;
         const buttonText = data?.announcementData?.data?.buttonText;
+        const linkText = data?.announcementData?.data?.linkText;
         const selectedPageForBar = data?.announcementData?.data?.selectedPageForBar;
         const selectedCollections = data?.announcementData?.data?.selectedCollections;
         const announcementDiv = document.querySelector('.announcement-head')
@@ -72,6 +73,10 @@ async function fetchAnnouncementText() {
             btn.style.padding = "4px"
             btn.style.marginLeft = "10px"
             btn.style.borderRadius = "4px"
+
+            btn.addEventListener("click", () => {
+                window.open(linkText, "_self")
+            })
 
 
         }

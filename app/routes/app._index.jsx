@@ -78,6 +78,7 @@ export const action = async ({ request }) => {
   const isEnabled = formData.get("enabled") === "on";
   const action = formData.get("action");
   const buttonText = formData.get("buttonText");
+  const linkText = formData.get("linkText");
   const selectedPageForBar = formData.get("selectedPageForBar");
   // const collections = formData.get("selectedCollections");
 
@@ -94,11 +95,11 @@ export const action = async ({ request }) => {
     const updatedAnnouncement = await prisma.announcement.upsert({
       where: { shopUrl: shopUrl },
       update: {
-        data: { announcementText, textColor, backgroundColor, isEnabled, action, buttonText, selectedPageForBar },
+        data: { announcementText, textColor, backgroundColor, isEnabled, action, buttonText, selectedPageForBar, linkText },
       },
       create: {
         shopUrl: shopUrl,
-        data: { announcementText, textColor, backgroundColor, isEnabled, action, buttonText, selectedPageForBar },
+        data: { announcementText, textColor, backgroundColor, isEnabled, action, buttonText, selectedPageForBar, linkText },
       },
     });
 
@@ -125,8 +126,9 @@ export default function Index() {
   const [submitting, setSubmitting] = useState(false)
   const announcementDetails = loaderData?.announcementData?.data;
   const collections = loaderData?.collectionsData?.data?.collections;
-  const [selected, setSelected] = useState("Button");  // Ensure initial state is "Button"
+  const [selected, setSelected] = useState(announcementDetails?.action ?? "No call to action");  // Ensure initial state is "Button"
   const [btnText, setBtnText] = useState(announcementDetails?.buttonText ?? "");
+  const [linkText, setLinkText] = useState(announcementDetails?.linkText ?? "");
   const [selectedPageForBar, setSelectedPageForBar] = useState(announcementDetails?.selectedPageForBar ?? 'hidden');
   const [selectedCollections, setSelectedCollections] = useState([])
 
@@ -141,9 +143,6 @@ export default function Index() {
     plural: 'collections',
   }
   const items = collections?.edges?.map((item) => item?.node) || [];
-
-
-
 
   // States to handle form values and preview
   const [announcementText, setAnnouncementText] = useState(announcementDetails?.announcementText ?? "");
@@ -174,6 +173,7 @@ export default function Index() {
         enabled: isEnabled ? "on" : "off",
         action: selected,
         buttonText: btnText ?? "",
+        linkText: linkText ?? "",
         selectedPageForBar,
         selectedCollections: selectedCollections
       },
@@ -187,14 +187,6 @@ export default function Index() {
   const handleTextColorChange = (value) => setTextColor(value);
   const handleEnabledChange = () => setIsEnabled(!isEnabled);
   const handleBarVisibilityOnPage = useCallback((value) => setSelectedPageForBar(value), []);
-
-
-  // const deselectedOptions = useMemo(
-  //   () => collections?.edges?.map((item) => {
-
-  //   }),
-  //   [],
-  // );
 
 
   useEffect(() => {
@@ -217,7 +209,6 @@ export default function Index() {
 
   }, [selectedPageForBar])
 
-  const navigate = useNavigate()
 
   const handleDeepLink = () => {
     const openUrl = `https://${shopify.config.shop}/admin/themes/current/editor?template=index&addAppBlockId=bd29b11c-592d-4856-be48-9c217c845a85/announcement&target=sectionGroup:header`;
@@ -303,6 +294,9 @@ export default function Index() {
                   <BlockStack>
                     <InlineStack gap={"800"}>
                       <TextField type="text" label="Button Text" value={btnText} onChange={(value) => setBtnText(value)} />
+                    </InlineStack>
+                    <InlineStack gap={"800"}>
+                      <TextField type="text" label="Link" value={linkText} onChange={(value) => setLinkText(value)} />
                     </InlineStack>
                   </BlockStack>
                 )}
